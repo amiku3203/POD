@@ -1,0 +1,38 @@
+vector<int> matrixSum(int n, int m, vector<vector<int>> mat, int q, vector<int> queries[])
+    {
+        vector<int> ans;
+        for(int j=0; j<q; j++){
+             int col=queries[j][2];
+             int row=queries[j][1];
+             int val=queries[j][0];
+             
+             int cs=col-val;
+             int ce=col+val;
+             int rs=row-val+1;
+             int re=row+val;
+             int sum=0;
+             for(int j=cs; j<=ce && j<m; j++){
+                  if(row-val>=0 && j<m && j>=0){
+                      sum+=mat[row-val][j];
+                  }
+                  if(row+val<n && j<m && j>=0){
+                      sum+=mat[row+val][j];
+                  }
+             }
+             
+             for(int j=rs; j<re && j<n ; j++){
+                  if(col-val>=0 && j<n && j>=0){
+                       sum+=mat[j][col-val];
+                  }
+                  if(col+val<m && j<n&& j>=0){
+                      sum+=mat[j][col+val];
+                  }
+                 
+                 
+             }
+             ans.push_back(sum);
+             
+             
+        }
+        return  ans;
+    }
