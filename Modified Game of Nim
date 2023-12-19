@@ -1,0 +1,17 @@
+int findWinner(int n, int A[]){
+        // code herei
+         int x=0;
+         for(int i=0; i<n; i++){
+              x=x^A[i];
+         }
+         if(x==0){
+             return 1;
+         }
+         if(n%2==1){
+             return 2;
+         } else {
+             return 1;
+         }
+        
+        
+    }
