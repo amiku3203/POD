@@ -1,0 +1,40 @@
+ bool recursiveMatching(string wild, int indexWild, int wildLength, string pattern, int indexPattern, int patternLength) {
+    if (indexWild == wildLength && indexPattern == patternLength)
+        return true;
+
+    if (indexWild >= wildLength) 
+        return false;
+
+    if (wild[indexWild] == '*') {
+        while (indexWild + 1 < wildLength && wild[indexWild + 1] == '*')
+            indexWild++;
+    }
+
+    if (indexWild >= wildLength) 
+        return false;
+
+    if (indexPattern >= patternLength) {
+        if (indexWild == wildLength - 1 && wild[wildLength - 1] == '*')
+            return true;
+        return false;
+    }
+
+    if (wild[indexWild] == '*' && indexWild + 1 != wildLength && indexPattern == patternLength)
+        return false;
+
+    if (wild[indexWild] == '?' || wild[indexWild] == pattern[indexPattern])
+        return recursiveMatching(wild, indexWild + 1, wildLength, pattern, indexPattern + 1, patternLength);
+
+    if (wild[indexWild] == '*')
+        return (recursiveMatching(wild, indexWild, wildLength, pattern, indexPattern + 1, patternLength) ||
+                recursiveMatching(wild, indexWild + 1, wildLength, pattern, indexPattern, patternLength));
+
+    return false;
+}
+
+bool matchWildPattern(string wild, string pattern) {
+    int wildLength = wild.size();
+    int patternLength = pattern.size();
+    bool flag = recursiveMatching(wild, 0, wildLength, pattern, 0, patternLength);
+    return flag;
+}
