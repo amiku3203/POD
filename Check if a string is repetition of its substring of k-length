@@ -1,0 +1,17 @@
+int kSubstrConcat (int n, string s, int k)
+	{
+	     map<string,int> freqStore;
+	    if(n%k!=0) return 0;
+	    
+	    for(int i=0;i<n;i++)
+	    {  
+	        if(i%k==0 )
+	        { 
+	            string str=s.substr(i,k);
+	            freqStore[str]++;
+	        }
+           if(freqStore.size()>2) return 0;
+	    }
+	    
+	    return 1;
+	}
