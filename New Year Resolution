@@ -1,0 +1,31 @@
+int memo[366][2025];
+
+class Solution {
+    
+    public : 
+     int canAchieveDesiredSum(int index, int currentSum, int days, int coins[]) {
+    if ((currentSum) && (!(currentSum % 20) || !(currentSum % 24) || currentSum == 2024))
+        return 1;
+    
+    if (index >= days || currentSum > 2024)
+        return 0;
+
+    if (memo[index][currentSum] != -1)
+        return memo[index][currentSum];
+
+    int option1 = canAchieveDesiredSum(index + 1, currentSum + coins[index], days, coins);
+    int option2 = canAchieveDesiredSum(index + 1, currentSum, days, coins);
+    int result = option1 | option2;
+
+    memo[index][currentSum] = result;
+    return result;
+}
+
+
+int isPossible(int N, int coins[]) {
+      memset(memo,-1,sizeof(memo));
+        return  canAchieveDesiredSum(0,0,N,coins);
+     
+}
+
+};
