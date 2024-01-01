@@ -1,0 +1,22 @@
+ bool canPair(vector<int> arr, int k) {
+          int size = arr.size();
+      vector<int> frequency(k, 0);
+
+   for (int idx = 0; idx < size; idx++) {
+    frequency[arr[idx] % k]++;
+    }
+
+    
+  if (frequency[0] % 2 != 0) {
+    return false;
+    }
+
+  for ( int i=1; i<k; i++) {
+    if (frequency[i] != frequency[k-i]) {
+        return false;
+    }
+  }
+
+return true;
+
+    }
