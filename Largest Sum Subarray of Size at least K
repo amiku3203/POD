@@ -1,0 +1,22 @@
+long long int maxSumWithK(long long int arr[], long long int size, long long int k) 
+    {
+         long long int maxSum[size];
+    maxSum[0] = arr[0];
+
+    long long int maxSoFar = arr[0];
+    for (long long int i = 1; i < size; i++) {
+        maxSoFar = max(arr[i], maxSoFar + arr[i]);
+        maxSum[i] = maxSoFar;
+    }
+
+    long long int sum = 0;
+    for (long long int i = 0; i < k; i++) sum += arr[i];
+
+    long long int result = sum;
+    for (long long int i = k; i < size; i++) {
+        sum = sum + arr[i] - arr[i - k];
+        result = max(result, sum);
+        result = max(result, sum + maxSum[i - k]);
+    }
+    return result;
+    }
