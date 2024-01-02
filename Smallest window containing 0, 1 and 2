@@ -1,0 +1,24 @@
+int smallestSubstring(string S) {
+     bool foundSubstring = false;
+     int lastIndexZero = -1, lastIndexOne = -1, lastIndexTwo = -1;
+     int minLength = S.size();
+     for (int i = 0; i < S.size(); i++) {
+     if (S[i] == '0') {
+        lastIndexZero = i;
+     } else if (S[i] == '1') {
+        lastIndexOne = i;
+      } else {
+        lastIndexTwo = i;
+     }
+
+    if (lastIndexZero != -1 && lastIndexOne != -1 && lastIndexTwo != -1) {
+        foundSubstring = true;
+        minLength = min(minLength, 1 + i - min(lastIndexZero, min(lastIndexOne, lastIndexTwo)));
+    }
+}
+if (foundSubstring) {
+    return minLength;
+}
+return -1;
+
+     }
