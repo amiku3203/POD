@@ -1,0 +1,44 @@
+class Solution
+{
+    public:
+    
+    
+   Node* sortedInsert(Node* head, Node* new_node)
+{
+    Node* current;
+
+    if (head == NULL || head->data >= new_node->data)
+    {
+        new_node->next = head;
+        head = new_node;
+    }
+    else
+    {
+        current = head;
+        while (current->next != NULL &&
+               current->next->data < new_node->data)
+        {
+            current = current->next;
+        }
+        new_node->next = current->next;
+        current->next = new_node;
+    }
+
+    return head;
+}
+
+Node* insertionSort(Node* head)
+{
+    Node* sortedList = NULL;
+    Node* current = head;
+
+    while (current != NULL)
+    {
+        Node* nextNode = current->next;
+        sortedList = sortedInsert(sortedList, current);
+        current = nextNode;
+    }
+
+    head = sortedList;
+    return head;
+}
