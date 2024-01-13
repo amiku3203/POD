@@ -1,0 +1,20 @@
+class Solution
+{   
+    public:
+    vector<int> repeatedRows(vector<vector<int>> &matrix, int M, int N) 
+    { 
+       vector<int> resultIndices;
+    map<vector<int>, int> rowFrequencyMap;
+
+    for (int rowIndex = 0; rowIndex < matrix.size(); ++rowIndex) {
+        if (rowFrequencyMap.find(matrix[rowIndex]) != rowFrequencyMap.end()) {
+            resultIndices.push_back(rowIndex);
+        } else {
+            rowFrequencyMap[matrix[rowIndex]]++;
+        }
+    }
+
+    return resultIndices;
+      
+    } 
+};
