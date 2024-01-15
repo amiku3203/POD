@@ -1,0 +1,15 @@
+ int dp[1001][1001];
+    int ans(int m, int n){
+         if (m < n) return 0;
+
+        if (n == 0) return 1;
+        if(dp[m][n]!=-1){
+            return dp[m][n];
+        }
+
+        return dp[m][n]=  ans(m - 1, n) + ans(m/2, n - 1);
+    }
+      int numberSequence(int m, int n){
+          memset(dp,-1,sizeof(dp));
+          return ans(m,n);
+    }
