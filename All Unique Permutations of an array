@@ -1,0 +1,33 @@
+class Solution {
+public:
+     void permuteUniqueHelper(vector<int> cur, vector<vector<int>> &res, int idx, vector<int> nums, map<vector<int>, int> &uniquePerms) {
+    if (cur.size() == nums.size()) {
+        if (uniquePerms.find(cur) == uniquePerms.end()) {
+            res.push_back(cur);
+            uniquePerms[cur] = 1;
+        }
+        return;
+    } else {
+        for (int i = idx; i < nums.size(); i++) {
+            cur.push_back(nums[i]);
+            swap(nums[idx], nums[i]);
+            permuteUniqueHelper(cur, res, idx + 1, nums, uniquePerms);
+            cur.pop_back();
+            swap(nums[idx], nums[i]);
+        }
+    }
+}
+
+vector<vector<int>> uniquePerms(vector<int> arr, int n) {
+    vector<int> curPerm;
+    vector<vector<int>> uniquePermsResult;
+    map<vector<int>, int> uniquePermsTracker;
+
+    permuteUniqueHelper(curPerm, uniquePermsResult, 0, arr, uniquePermsTracker);
+
+    sort(uniquePermsResult.begin(), uniquePermsResult.end());
+
+    return uniquePermsResult;
+}
+
+};
