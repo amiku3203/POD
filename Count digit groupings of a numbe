@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<vector<int>> memo;
+
+    int countGroups(int position, int prevSum, int length, string num) {
+        if (position == length)
+            return 1;
+
+        if (memo[position][prevSum] != -1)
+            return memo[position][prevSum];
+
+        memo[position][prevSum] = 0;
+
+        int result = 0;
+        int currentSum = 0;
+
+        for (int i = position; i < length; i++) {
+            currentSum += (num[i] - '0');
+
+            if (currentSum >= prevSum)
+                result += countGroups(i + 1, currentSum, length, num);
+        }
+
+        memo[position][prevSum] = result;
+
+        return result;
+    }
+
+    int TotalCount(string str) {
+        int n = str.size();
+        memo.assign(n, vector<int>(n * 9 + 1, -1));
+        return countGroups(0, 0, n, str);
+    }
+};
