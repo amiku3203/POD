@@ -1,0 +1,32 @@
+class Solution
+{
+  public:
+   
+   int findCharacter(const std::string& str, char targetChar) {
+    return str.find(targetChar);
+    }
+     
+    bool checkPangram (string s) {
+        if(s.size()<26){
+            return false;
+        }
+       string result = s;
+
+     for (char &c : result) {
+        c = std::toupper(c);
+    }
+    for(int i=0; i<26; i++){
+        int foundIndex = findCharacter(result,  'A'+i);
+        if (foundIndex != std::string::npos) {
+            continue;   
+        } else {
+            return false;
+        }
+     
+    }
+    return true;
+     
+     
+    }
+
+};
