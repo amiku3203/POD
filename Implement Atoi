@@ -1,0 +1,32 @@
+class Solution{
+  public:
+     
+    int atoi(string s) {
+           int n = s.length();
+    int l = 0;
+    int sum = 0;
+    bool is_negative = false;
+
+    for (int x = n - 1; x >= 0; x--) {
+        if (s[x] == '-') {
+            if (x == 0) {
+                is_negative = true;
+            } else {
+                
+                return -1;
+            }
+        } else if (isdigit(s[x])) {
+            int num = s[x] - '0';
+            sum += pow(10, l) * num;
+            l++;
+        } else {
+             
+            return -1;
+        }
+    }
+    if(is_negative){
+        return -1*sum;
+    }
+     return sum;
+    }
+};
