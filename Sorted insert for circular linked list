@@ -1,0 +1,45 @@
+class Solution
+{
+    public:
+    
+    
+    
+    // Helper function to get the last node in the circular list
+    Node* getLastNode(Node* head) {
+        Node* temp = head;
+         while (temp->next != head) {
+             temp = temp->next;
+           }
+     return temp;
+    }
+
+    Node* sortedInsert(Node* head, int data) {
+    if (head == NULL) {
+        Node* newnode = new Node(data);
+        newnode->next = newnode;  // Point to itself in a circular list
+        return newnode;
+    } 
+
+    if (head->data > data) {
+        Node* newnode = new Node(data);
+        Node* last = getLastNode(head);
+        newnode->next = head;
+        last->next = newnode;
+        return newnode;
+    }
+
+    Node* temp = head;
+    while (temp->next != head && temp->next->data < data) {
+        temp = temp->next;
+    }
+
+    Node* newnode = new Node(data);
+    Node* temp1 = temp->next;
+    temp->next = newnode;
+    newnode->next = temp1;
+
+    return head;
+}
+
+
+};
