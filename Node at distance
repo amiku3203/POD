@@ -1,0 +1,35 @@
+class Solution
+{
+    private:
+    
+    bool validate(Node *root, int k){
+         if(root==NULL) return false;
+         if(root->right==NULL && root->left==NULL) {
+             return (k==0)? true:false;
+         }
+         bool leftans=validate(root->left,k-1);
+         bool rightans=validate(root->right,k-1);
+         
+         return leftans||rightans;
+    }
+    
+    void inorder(Node *root, int k , unordered_set<Node* > &s){
+        if(root==NULL){
+             return;
+        }
+        inorder(root->left,k,s);
+        if(validate(root,k)){
+             s.insert(root);
+        }
+        inorder(root->right,k,s);
+    }
+    
+    public:
+    //Function to return count of nodes at a given distance from leaf nodes.
+    int printKDistantfromLeaf(Node* root, int k)
+    {
+     unordered_set<Node *> s;
+     inorder(root,k,s);
+     return s.size();
+    }
+};
