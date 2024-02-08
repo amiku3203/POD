@@ -1,0 +1,25 @@
+class Solution{
+    public:
+    
+     int isSumProperty(Node *root)
+    {
+   
+    if (root == NULL || (root->left == NULL && root->right == NULL)) {
+        return 1;
+    }
+
+     
+    int left = (root->left) ? root->left->data : 0;
+    int right = (root->right) ? root->right->data : 0;
+
+    
+    if (root->data != left + right) {
+        return 0;
+    }
+
+    
+    return   root->data==left+right && isSumProperty(root->left) && isSumProperty(root->right);
+}
+
+
+};
