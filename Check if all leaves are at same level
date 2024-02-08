@@ -1,0 +1,37 @@
+class Solution{
+  public:
+  
+    void checkmate(Node *root,map<int,vector<int>> &m){
+        int l=0;
+         queue<Node*> pendingNodes;
+         pendingNodes.push(root);
+             while(!pendingNodes.empty()){
+                 int size=pendingNodes.size();
+                 for(int i=1; i<=size; i++){
+                      Node *front=pendingNodes.front();
+                      pendingNodes.pop();
+                      if(front->left==NULL && front->right==NULL){
+                           m[l].push_back(front->data);
+                      }
+                      if(front->left){
+                          pendingNodes.push(front->left);
+                      }
+                      if(front->right){
+                          pendingNodes.push(front->right);
+                      }
+                 }
+                 l++;
+             }
+    }
+    
+    bool check(Node *root)
+    {
+        map<int,vector<int>> m;
+        checkmate(root,m);
+       
+          if(m.size()==1){
+              return true;
+          }
+          return false;
+    }
+};
