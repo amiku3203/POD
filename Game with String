@@ -1,0 +1,32 @@
+class Solution{
+public:
+    int minValue(string s, int k){
+        unordered_map<char,int> mp;
+        for(int i=0; i<s.size(); i++){
+            mp[s[i]]++;
+        }
+         
+        priority_queue<int> pq;
+        for(auto  it: mp){
+            pq.push(it.second);
+        }
+        
+        while(k--){
+             int val=pq.top();
+             pq.pop();
+             val=val-1;
+             pq.push(val);
+             
+        }
+        int ans=0;
+        while(!pq.empty()){
+              int topValue=pq.top();
+              pq.pop();
+              ans+=(topValue*topValue);
+        }
+        return ans;
+        
+        
+        
+    }
+};
