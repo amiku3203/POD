@@ -1,0 +1,54 @@
+class Solution
+{
+    public:
+        
+
+int maxProfit(vector<int>&price){
+     int n=price.size();
+     int *leftdp=new int[n];
+     int *rightdp=new int[n];
+     for(int i=0; i<n; i++){
+         leftdp[i]=0;
+         rightdp[i]=0;
+     }
+     
+     //left
+     int mpl=0;
+     int lmin=price[0];
+     for(int i=1; i<n; i++){
+           if(price[i]<lmin){
+               lmin=price[i];
+           }
+           mpl=price[i]-lmin;
+          if(leftdp[i-1]<mpl){
+              leftdp[i]=mpl;
+          } else {
+              leftdp[i]=leftdp[i-1];
+          }
+          
+           
+     }
+   
+     //right
+      int rmax=price[n-1];
+      int mrp=0;
+      for(int i=n-2; i>=0; i--){
+          if(price[i]>rmax){
+              rmax=price[i];
+          }
+          
+          mrp=rmax-price[i];
+          if(rightdp[i+1]<mrp){
+               rightdp[i]=mrp;
+          } else{
+              rightdp[i]=rightdp[i+1];
+          }
+      }
+     
+     int ans=leftdp[0]+rightdp[0];
+     for(int i=1; i<n; i++){
+          ans=max(ans,leftdp[i]+rightdp[i]);
+     }
+     return ans;
+}
+};
