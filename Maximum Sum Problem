@@ -1,0 +1,22 @@
+class Solution
+{
+    public:
+     int sum=0;
+        int maxSum(int n)
+        {
+          if (n == 0)
+        {
+            return 0;
+        }
+
+        int option1 = maxSum(n / 2);
+        int option2 = maxSum(n / 3);
+        int option3 = maxSum(n / 4);
+
+        int currentSum = option1 + option2 + option3;
+        return max(n, currentSum);
+            
+        
+        }
+};
+
