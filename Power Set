@@ -1,0 +1,29 @@
+class Solution{
+	public:
+	  int subs(string input, vector<string> &output) {
+    if (input.empty()) {
+        output.push_back(""); 
+        return 1;
+    }
+
+    string smallString = input.substr(1);
+    int smallOutputSize = subs(smallString, output);
+
+    
+    for (int i = 0; i < smallOutputSize; i++) {
+        output.push_back(input[0]+output[i]);
+    }
+
+    return  2*smallOutputSize;
+}
+
+   vector<string> AllPossibleStrings(string s) {
+    vector<string> result;
+    subs(s, result);
+    result.erase(remove_if(result.begin(), result.end(), [](const string& str) {
+        return str.empty();
+    }), result.end());
+    sort(result.begin(), result.end());
+    return result;
+}
+};
