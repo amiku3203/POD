@@ -1,0 +1,23 @@
+class Solution{
+public:
+    int DivisibleByEight(string s){
+        int ans;
+        if(s.length()>3)
+        {
+            int number=stoi(s.substr(s.length()-3));
+            if(number%8)
+                ans=-1;
+            else
+                ans=1; 
+        }
+        else
+        {
+            int number=stoi(s);
+            if(number%8)
+                ans=-1;
+            else
+                ans=1;
+        }
+        return ans;
+    }
+};
