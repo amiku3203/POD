@@ -1,0 +1,21 @@
+ string longestSubstring(string inputString, int stringLength) {
+    int maxLen = 0;
+    string result = "-1";
+    int i = 0, j = 0;
+
+    while (i < stringLength && j < stringLength) {
+        string currentSubstring = inputString.substr(i, j - i + 1);
+
+        if (inputString.find(currentSubstring, j + 1) != string::npos) {
+            int len = currentSubstring.length();
+            if (len > maxLen) {
+                maxLen = len;
+                result = currentSubstring;
+            }
+        } else {
+            i++;
+        }
+        j++;
+    }
+    return result;
+}
